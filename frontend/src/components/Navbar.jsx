@@ -12,7 +12,7 @@ const Navbar = () => {
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
-    <header className="bg-white shadow-md 2xl:container">
+    <header className="bg-red-50 shadow-md 2xl:container">
       <div className="mx-auto max-w-screen-xl  px-4 sm:px-6 lg:px-8 2xl:px-2">
         <div className="flex h-16 items-center justify-between">
           {/* Logo Section */}
@@ -24,7 +24,7 @@ const Navbar = () => {
 
           {/* Navigation Links */}
           <nav
-            className={`absolute left-0 top-16 w-full bg-gray-100 text-lg md:bg-white p-5 md:static md:flex md:items-center md:justify-center md:p-0 ${
+            className={`absolute left-0 top-16 w-full bg-gray-100 text-lg md:bg-red-50 p-5 md:static md:flex md:items-center md:justify-center md:p-0 ${
               isMenuOpen ? "block" : "hidden"
             } transition-all duration-300 ease-in-out`}
           >
@@ -48,59 +48,20 @@ const Navbar = () => {
 
               <li>
                 <NavLink
-                to='/donors-list'
+                to='/faq'
                   className={({isActive})=>`text-gray-700 transition font-medium hover:text-red-600 hover:font-semibold ${isActive ? "text-red-600 font-semibold": ""} transition-all duration-300 ease-in`}
                 >
-                  Find Blood
+                  FAQ
                 </NavLink>
               </li>
               
-              <li className="relative">
-                <NavLink to='register'
-                 className={({isActive})=>`text-gray-700 transition font-medium hover:text-red-600 hover:font-semibold ${isActive ? "text-red-600 font-semibold": ""} transition-all duration-300 ease-in`}
-                >
-                <button
-                  className="flex items-center gap-1 text-gray-700 transition"
-                  // className={({isActive})=>`flex flex-row items-center gap-1 text-gray-700 transition font-medium hover:text-red-600 hover:font-semibold ${isActive ? "text-red-600 font-semibold": ""} transition-all duration-300 ease-in`}
-                  onClick={toggleDropdown}
+              <li>
+                <NavLink
+                to='/register'
+                  className={({isActive})=>`text-gray-700 transition font-medium hover:text-red-600 hover:font-semibold ${isActive ? "text-red-600 font-semibold": ""} transition-all duration-300 ease-in`}
                 >
                   Register
-                  <svg
-                    className="h-4 w-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
                 </NavLink>
-                {isDropdownOpen && (
-                  <ul className="absolute left-0 mt-2 w-40 rounded-lg bg-white shadow-lg">
-                    <li>
-                      <a
-                        className="block px-4 py-2 text-gray-700 transition hover:bg-gray-100"
-                        href="#"
-                      >
-                        Service 1
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        className="block px-4 py-2 text-gray-700 transition hover:bg-gray-100"
-                        href="#"
-                      >
-                        Service 2
-                      </a>
-                    </li>
-                  </ul>
-                )}
               </li>
             </ul>
           </nav>

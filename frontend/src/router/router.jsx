@@ -5,6 +5,7 @@ import Register from "../pages/auth/Register";
 import Login from "../pages/auth/Login";
 import About from "../pages/about/About";
 import DonorsList from "../pages/donors-list/DonorsList";
+import FAQ from "../pages/faq/FAQ";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path: "/donors-list",
                 element: <DonorsList/>
+            },
+            {
+                path: "/faq",
+                element: <FAQ/>
             },
         ]
     },

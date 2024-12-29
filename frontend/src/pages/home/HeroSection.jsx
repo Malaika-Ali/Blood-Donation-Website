@@ -25,7 +25,7 @@ const HeroHeaderShape = () => (
 
 const HeroSection = () => {
 	return (
-		<section className=" py-24 lg:py-0 bg-white  text-black  relative z-10 overflow-hidden">
+		<section className=" py-24 lg:py-0 bg-red-50  text-black  relative z-10 overflow-hidden">
 			<HeroHeaderShape />
 
 			<div className="container px-4 mx-auto relative ">

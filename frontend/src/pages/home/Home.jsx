@@ -1,14 +1,14 @@
 import React from 'react'
 import HeroSection from './HeroSection'
 import GetBloodProcedure from './GetBloodProcedure'
-import FAQ from './FAQ'
+import Benefits from './Benefits'
 
 const Home = () => {
   return (
     <>
      <HeroSection/> 
+     <Benefits/>
      <GetBloodProcedure/>
-     {/* <FAQ/> */}
     </>
   )
 }
