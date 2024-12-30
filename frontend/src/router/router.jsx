@@ -6,6 +6,7 @@ import Login from "../pages/auth/Login";
 import About from "../pages/about/About";
 import DonorsList from "../pages/donors-list/DonorsList";
 import FAQ from "../pages/faq/FAQ";
+import RequestBloodPage from "../pages/bloodrequest form/RequestBloodPage";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
             {
                 path: "/faq",
                 element: <FAQ/>
+            },
+            {
+                path: "/request-blood",
+                element: <RequestBloodPage/>
             },
         ]
     },

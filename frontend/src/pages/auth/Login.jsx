@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 import logo from '../../assets/logo.png';
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
@@ -9,27 +12,34 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const LoginForm = () => {
-  const [validated, setValidated] = useState(false);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("/api/v1/users/login", data, {
+        withCredentials: true,
+      });
 
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+      if (response.data.statusCode === 200) {
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful",
+          text: "You have been logged in successfully!",
+        });
+        navigate("/"); 
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: error.response?.data?.message || "An error occurred during login.",
+      });
     }
-
-    setValidated(true);
   };
 
   return (
-    <form
-      noValidate
-      validated={validated}
-      onSubmit={handleSubmit}
-      className="mt-6"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
       <div className="flex flex-wrap">
         <div className="w-full px-2">
           <div className="w-full flex flex-col relative mb-6">
@@ -37,16 +47,23 @@ const LoginForm = () => {
               EMAIL:
             </label>
             <input
+              {...register("email", { 
+                required: "Email is required",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address"
+                }
+              })}
               type="email"
               className="bg-transparent border border-gray-300 focus:outline-none focus:border-blue-600 duration-300 min-h-[48px] leading-none px-3 pl-10"
               id="email"
               placeholder="johnsmith@gmail.com"
-              required
             />
             <FontAwesomeIcon
               icon={faAt}
               className="absolute top-12 text-sm left-4 opacity-80"
             />
+            {errors.email && <span className="text-red-500 text-sm mt-1">{errors.email.message}</span>}
           </div>
         </div>
         <div className="w-full px-2">
@@ -55,16 +72,17 @@ const LoginForm = () => {
               PASSWORD:
             </label>
             <input
+              {...register("password", { required: "Password is required" })}
               type="password"
               className="bg-transparent border border-gray-300 focus:outline-none focus:border-blue-600 duration-300 min-h-[48px] leading-none px-3 pl-10"
               id="password"
               placeholder="******"
-              required
             />
             <FontAwesomeIcon
               icon={faLock}
               className="absolute top-12 text-sm left-4 opacity-80"
             />
+            {errors.password && <span className="text-red-500 text-sm mt-1">{errors.password.message}</span>}
           </div>
         </div>
 
@@ -111,3 +129,4 @@ const Login = () => {
 };
 
 export default Login;
+
